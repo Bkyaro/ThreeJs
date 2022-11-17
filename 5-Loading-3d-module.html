@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>加载3d模型</title>
+  </head>
+  <body>
+    <!-- 官方推荐使用glTF(.GLB 或者 .GLTF)格式文件 -->
+    <!-- https://github.khronos.org/glTF-Project-Explorer/ -->
+    <script>
+      import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+      const loader = new GLTFLoader();
+
+      loader.load(
+        "path/to/model.glb",
+        function (gltf) {
+          scene.add(gltf.scene);
+        },
+        undefined,
+        function (error) {
+          console.error(error);
+        }
+      );
+    </script>
+  </body>
+</html>

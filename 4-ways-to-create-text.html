@@ -4,11 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>画线</title>
+    <title>创建文字</title>
   </head>
   <style>
     body {
       margin: 0;
+    }
+    span {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      text-align: center;
+      z-index: 100;
+      color: white;
+      font-weight: bold;
     }
   </style>
   <script src="./source/three.js"></script>
@@ -51,7 +60,26 @@
         line.rotation.y += 0.01;
         renderer.render(scene, camera);
       }
-      animate()
+      animate();
     </script>
+
+    <!-- 1. DOM + CSS -->
+    <!-- 可以直接使用传统 DOM+CSS，注意需要给予样式、特别留意z-index属性值 -->
+    <span>haha</span>
+
+    <!-- 2. CSS2DRenderer 或者 CSS3DRenderer -->
+    <!-- 与第一点类似，不过通过renderer，元素可以更紧密、更动态地集成到场景中。-->
+
+    <!-- 3. 在canvas上绘制文本并作为纹理(texture)使用 -->
+
+    <!-- 4. 使用3d软件导出的模型 -->
+
+    <!-- 5. 使用Three自带的方法 -->
+    <script>
+        new THREE.TextGeometry( text, parameters );
+    </script>
+
+    <!-- 6. 引用troika包，troika使用与BMFonts类似的技术渲染高质量的抗锯齿文本，可以直接与任何.TTF或.WOFF字体文件使用 -->
+    <!-- https://github.com/protectwise/troika -->
   </body>
 </html>
