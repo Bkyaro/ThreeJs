@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<script src="./source/three.js"></script>
-<body>
-    
-</body>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <script src="./source/three.js"></script>
+  <body>
+    <script>
+      //threejs的三大要素: | scene | camear | renderer |
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      ); //@param(FOV, 纵横比, 最近距离, 最远距离)
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight); //@param(渲染比例)
+
+      //插入页面中
+      document.body.appendChild(renderer.domElement);
+
+      //创建一个立方体
+      const geometry = new THREE.BoxGeometry(1, 1, 1); //点线面
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); //材质+颜色
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube); //默认渲染到坐标0,0,0，跟相机位置重合，直接糊脸上
+      camera.position.z = 5; //所以把相机位置往外挪一挪
+
+      //使用requestAnimationFrame渲染出来。好处：当用户去到另一个标签时，渲染会暂停，避免性能浪费
+      function animate() {
+        requestAnimationFrame(animate);
+
+        //旋转
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;  
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
 </html>
